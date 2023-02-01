@@ -28,7 +28,7 @@ namespace Application.Order.Commands.CreateOrder
             RuleForEach(a => a.Items).SetValidator(new OrderItemValidator());
         }
 
-        private bool AddressIsValid(Address address)
+        private static bool AddressIsValid(Address address)
         {
             return address.PostalCode != null &&
                  address.HouseNumber > 0;

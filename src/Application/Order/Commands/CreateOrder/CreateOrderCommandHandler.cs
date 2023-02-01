@@ -32,8 +32,8 @@ public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, Cre
         }
 
         var addressResult = Domain.ValueObjects.Address.Create(command.Address.PostalCode,
-            command.Address.HouseNumber,
-            command.Address.AddressExtra);
+                                                                command.Address.HouseNumber,
+                                                                command.Address.AddressExtra);
 
         if (addressResult.IsFailure)
         {
@@ -50,7 +50,7 @@ public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, Cre
 
         AddOrderItems(command, order);
 
-        var orderInserted = await orderRepository.AddAsync(order);
+        var orderInserted = await orderRepository.AddAsync(order, cancellationToken);
 
         var result = new CreateOrderResponse
         {
@@ -67,7 +67,7 @@ public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, Cre
 
         foreach (var item in request.Items)
         {
-            var product = products.Where(a => a.ProductType== item.ProductType).FirstOrDefault();
+            var product = products.FirstOrDefault(a => a.ProductType== item.ProductType);
 
             if (product == null)
             {

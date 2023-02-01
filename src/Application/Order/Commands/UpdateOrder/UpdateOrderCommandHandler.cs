@@ -17,7 +17,6 @@ public class UpdateOrderCommandHandler : IRequestHandler<UpdateOrderCommand, boo
     }
     public async Task<bool> Handle(UpdateOrderCommand command, CancellationToken cancellationToken)
     {
-
         var emailResult = Email.Create(command.Email);
 
         if (emailResult.IsFailure)
@@ -43,7 +42,7 @@ public class UpdateOrderCommandHandler : IRequestHandler<UpdateOrderCommand, boo
 
         order.EditOrder(command.CustomerName, emailResult.Value, addressResult.Value);
 
-        await orderRepository.UpdateAsync(order);
+        await orderRepository.UpdateAsync(order, cancellationToken);
 
         return true;
     }

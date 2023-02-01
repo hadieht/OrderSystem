@@ -38,7 +38,7 @@ public class OrderConfiguration : IEntityTypeConfiguration<Order>
 
         builder.HasMany(p => p.Items).WithOne(p => p.Order)
                 .OnDelete(DeleteBehavior.Cascade)
-                .Metadata.PrincipalToDependent.SetPropertyAccessMode(PropertyAccessMode.Field);
+                .Metadata.PrincipalToDependent?.SetPropertyAccessMode(PropertyAccessMode.Field);
 
     }
 }

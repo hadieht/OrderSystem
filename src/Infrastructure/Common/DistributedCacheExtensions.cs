@@ -18,7 +18,7 @@ public static class DistributedCacheExtensions
         return cache.SetAsync(key, bytes, options);
     }
 
-    public static bool TryGetValue<T>(this IDistributedCache cache, string key, out T? value)
+    public static bool TryGetValue<T>(this IDistributedCache cache, string key, out T value)
     {
         var val = cache.Get(key);
         value = default;

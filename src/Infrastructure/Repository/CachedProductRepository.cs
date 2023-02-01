@@ -5,13 +5,13 @@ using Microsoft.Extensions.Caching.Distributed;
 
 namespace Infrastructure.Repository
 {
-    public class CachedProductRepositoryDecorator : IReadOnlyProductRepository
+    public class CachedProductRepository : IReadOnlyProductRepository
     {
         private readonly IProductRepository productRepository;
         private readonly IDistributedCache cache;
         private const string CacheKey = "Products";
         private readonly DistributedCacheEntryOptions cacheEntryOptions;
-        public CachedProductRepositoryDecorator(IProductRepository productRepository,
+        public CachedProductRepository(IProductRepository productRepository,
             IDistributedCache cache)
         {
             this.productRepository = productRepository;
@@ -23,33 +23,28 @@ namespace Infrastructure.Repository
 
         public async Task<IEnumerable<Product>> GetAllAsync()
         {
-            List<Product> result;
-
-            if (cache.TryGetValue(CacheKey, out result))
+            if (cache.TryGetValue(CacheKey, out List<Product> result))
             {
                 return result;
             }
-            else
-            {
-                result = (await productRepository.GetAllAsync()).ToList();
 
-                await cache.SetAsync(CacheKey, result, cacheEntryOptions);
-            }
+            result = (await productRepository.GetAllAsync()).ToList();
+
+            await cache.SetAsync(CacheKey, result, cacheEntryOptions);
 
             return result;
         }
 
         public async Task<Product> GetAsync(int id, CancellationToken cancellationToken = default)
         {
-            string key = $"{CacheKey}-{id}";
+            var key = $"{CacheKey}-{id}";
 
-            Product product;
-            if (cache.TryGetValue(CacheKey, out product))
+            if (cache.TryGetValue(CacheKey, out Product product))
             {
                 return product;
             }
 
-            var result = await productRepository.GetAsync(id);
+            var result = await productRepository.GetAsync(id, cancellationToken);
 
             await cache.SetAsync(key, result, cacheEntryOptions);
 

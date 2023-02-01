@@ -6,9 +6,9 @@ namespace Domain.Entities
 {
     public class Product : BaseEntity
     {
-        public ProductType ProductType { get; private set; }
+        public ProductType ProductType { get; }
 
-        public double Width { get; private set; }
+        public double Width { get; }
 
         protected Product()
         {

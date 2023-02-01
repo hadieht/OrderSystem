@@ -22,7 +22,7 @@ public class DeleteOrderCommandHandler : IRequestHandler<DeleteOrderCommand, boo
             throw new Common.Exceptions.NotFoundException("Order not found!");
         }
 
-        await orderRepository.RemoveAsync(order);
+        await orderRepository.RemoveAsync(order, cancellationToken);
 
         return true;
     }

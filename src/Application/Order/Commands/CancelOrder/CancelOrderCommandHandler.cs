@@ -19,25 +19,30 @@ public class CancelOrderCommandHandler : IRequestHandler<CancelOrderCommand, boo
 
         var order = await orderRepository.GetOrderWithItemAsync(command.OrderNumber);
 
-        if (order== null)
+        ValidateOrder(order);
+
+        order.CancelOrder();
+
+        await orderRepository.UpdateAsync(order, cancellationToken);
+
+        return true;
+    }
+
+    private void ValidateOrder(Domain.Entities.Order order)
+    {
+        if (order == null)
         {
             throw new NotFoundException("Order not found!");
         }
 
         if (order.Status == Domain.Enums.OrderStatus.Canceled)
         {
-            throw new ValidationException("Order already has cancel status", nameof(Domain.Enums.OrderStatus));
+            throw new ValidationException("Order already has cancel status");
         }
 
         if (order.Status != Domain.Enums.OrderStatus.New)
         {
-            throw new ValidationException("You can cancel New orders", nameof(Domain.Enums.OrderStatus));
+            throw new ValidationException("You can cancel New orders");
         }
-
-        order.CancelOrder();
-
-        await orderRepository.UpdateAsync(order);
-
-        return true;
     }
 }

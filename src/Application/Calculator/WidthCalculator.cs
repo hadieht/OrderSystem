@@ -6,12 +6,12 @@ namespace Application.Calculator
 {
     public class WidthCalculator : IWidthCalculator
     {
-        private static string Measurement = "mm";
+        private static readonly string Measurement = "mm";
         public double BinWidthCalculator(IEnumerable<OrderItem> orderItems)
         {
             double width = 0;
 
-            foreach (OrderItem item in orderItems)
+            foreach (var item in orderItems)
             {
                 if (item.Product.ProductType == Domain.Enums.ProductType.Mug)
                 {

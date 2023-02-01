@@ -6,6 +6,7 @@ using Application.Order.Queries.GetOrder;
 using Application.Order.Queries.GetOrdersList;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics.CodeAnalysis;
+using Application.Order.Commands.UpdateOrder;
 
 namespace API.Controllers;
 
@@ -48,7 +49,7 @@ public class OrderController : ApiControllerBase
         };
         var result = await Mediator.Send(request);
 
-        if (result.IsSuccess && result.Value == null)
+        if (result is { IsSuccess: true, Value: null })
         {
             return NoContent();
         }

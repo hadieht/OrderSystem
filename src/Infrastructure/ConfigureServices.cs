@@ -33,7 +33,7 @@ public static class ConfigureServices
         services.AddTransient<IProductRepository, ProductRepository>();
         services.AddTransient<IOrderRepository, OrderRepository>();
 
-        services.AddScoped<IReadOnlyProductRepository, CachedProductRepositoryDecorator>();
+        services.AddScoped<IReadOnlyProductRepository, CachedProductRepository>();
 
         services.AddDistributedMemoryCache();
 

@@ -21,7 +21,6 @@ public class GetAllProductsCommandHandler : IRequestHandler<GetAllProductsComman
     {
         var allProducts = await productRepository.GetAllAsync();
 
-
         var result = mapper.Map<List<GetProductsResponse>>(allProducts);
 
         return Result.Success(result);

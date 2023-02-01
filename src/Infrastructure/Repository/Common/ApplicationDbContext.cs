@@ -5,7 +5,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
-namespace Infrastructure.Repositry.Common;
+namespace Infrastructure.Repository.Common;
 
 public class ApplicationDbContext : DbContext
 {

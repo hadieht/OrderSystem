@@ -24,11 +24,4 @@ namespace Application.Order.Queries.GetOrder
 
         public List<GetOrderItemResponse> Items { get; set; }
     }
-
-    public class GetOrderItemResponse
-    {
-        public ProductType Product { get; set; }
-        public int Quantity { get; set; }
-    }
-
 }

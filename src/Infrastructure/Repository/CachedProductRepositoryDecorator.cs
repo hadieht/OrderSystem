@@ -1,17 +1,15 @@
 ﻿using Application.Repositories;
-using CSharpFunctionalExtensions;
 using Domain.Entities;
 using Infrastructure.Common;
 using Microsoft.Extensions.Caching.Distributed;
-using Microsoft.Extensions.Caching.Memory;
 
-namespace Infrastructure.Repositry
+namespace Infrastructure.Repository
 {
     public class CachedProductRepositoryDecorator : IReadOnlyProductRepository
     {
         private readonly IProductRepository productRepository;
         private readonly IDistributedCache cache;
-        private const string cacheKey = "Products";
+        private const string CacheKey = "Products";
         private readonly DistributedCacheEntryOptions cacheEntryOptions;
         public CachedProductRepositoryDecorator(IProductRepository productRepository,
             IDistributedCache cache)
@@ -27,7 +25,7 @@ namespace Infrastructure.Repositry
         {
             List<Product> result;
 
-            if (cache.TryGetValue(cacheKey, out result))
+            if (cache.TryGetValue(CacheKey, out result))
             {
                 return result;
             }
@@ -35,7 +33,7 @@ namespace Infrastructure.Repositry
             {
                 result = (await productRepository.GetAllAsync()).ToList();
 
-                await cache.SetAsync(cacheKey, result, cacheEntryOptions);
+                await cache.SetAsync(CacheKey, result, cacheEntryOptions);
             }
 
             return result;
@@ -43,10 +41,10 @@ namespace Infrastructure.Repositry
 
         public async Task<Product> GetAsync(int id, CancellationToken cancellationToken = default)
         {
-            string key = $"{cacheKey}-{id}";
+            string key = $"{CacheKey}-{id}";
 
             Product product;
-            if (cache.TryGetValue(cacheKey, out product))
+            if (cache.TryGetValue(CacheKey, out product))
             {
                 return product;
             }
@@ -61,7 +59,7 @@ namespace Infrastructure.Repositry
 
         public async Task ResetCache()
         {
-            await cache.RefreshAsync(cacheKey);
+            await cache.RefreshAsync(CacheKey);
         }
 
     }

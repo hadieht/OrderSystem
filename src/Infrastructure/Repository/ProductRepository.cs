@@ -1,7 +1,7 @@
 ﻿using Application.Repositories;
-using Infrastructure.Repositry.Common;
+using Infrastructure.Repository.Common;
 
-namespace Infrastructure.Repositry;
+namespace Infrastructure.Repository;
 
 public class ProductRepository : Repository<Domain.Entities.Product>, IProductRepository
 {

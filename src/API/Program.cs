@@ -2,7 +2,7 @@ using API;
 using API.Http;
 using Application;
 using Infrastructure;
-using Infrastructure.Repositry.Common;
+using Infrastructure.Repository.Common;
 
 var builder = WebApplication.CreateBuilder(args);
 

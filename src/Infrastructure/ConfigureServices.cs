@@ -1,8 +1,7 @@
 ﻿using Application.Repositories;
 using Infrastructure.Common;
-
-using Infrastructure.Repositry;
-using Infrastructure.Repositry.Common;
+using Infrastructure.Repository;
+using Infrastructure.Repository.Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

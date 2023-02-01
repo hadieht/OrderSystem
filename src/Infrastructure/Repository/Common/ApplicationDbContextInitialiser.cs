@@ -3,7 +3,7 @@ using Domain.Entities;
 using Domain.Enums;
 using Microsoft.Extensions.Logging;
 
-namespace Infrastructure.Repositry.Common;
+namespace Infrastructure.Repository.Common;
 
 public class ApplicationDbContextInitialiser
 {

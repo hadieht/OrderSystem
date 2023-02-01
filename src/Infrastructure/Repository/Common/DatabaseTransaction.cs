@@ -1,7 +1,7 @@
 ﻿using Application.Common.Interfaces;
 using Microsoft.EntityFrameworkCore.Storage;
 
-namespace Infrastructure.Repositry.Common;
+namespace Infrastructure.Repository.Common;
 
 public class DatabaseTransaction : IDatabaseTransaction
 {

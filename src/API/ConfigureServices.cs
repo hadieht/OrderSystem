@@ -1,5 +1,5 @@
 ﻿using API.Mapper;
-using Infrastructure.Repositry.Common;
+using Infrastructure.Repository.Common;
 using Microsoft.AspNetCore.Mvc;
 using System.Reflection;
 using System.Text.Json.Serialization;

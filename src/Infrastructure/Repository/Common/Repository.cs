@@ -2,7 +2,7 @@
 using Ardalis.GuardClauses;
 using Microsoft.EntityFrameworkCore;
 
-namespace Infrastructure.Repositry.Common;
+namespace Infrastructure.Repository.Common;
 
 public class Repository<TEntity> : IRepository<TEntity>
     where TEntity : Domain.Common.BaseEntity

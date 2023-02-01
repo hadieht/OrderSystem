@@ -1,9 +1,9 @@
 ﻿using Application.Repositories;
 using Domain.Entities;
-using Infrastructure.Repositry.Common;
+using Infrastructure.Repository.Common;
 using Microsoft.EntityFrameworkCore;
 
-namespace Infrastructure.Repositry;
+namespace Infrastructure.Repository;
 
 public class OrderRepository : Repository<Domain.Entities.Order>, IOrderRepository
 {

@@ -1,5 +1,4 @@
 ﻿using Application.Common.Models;
-using Application.Order.Commands.CreateOrder;
 using FluentValidation;
 
 namespace Application.Order.Commands.UpdateOrder

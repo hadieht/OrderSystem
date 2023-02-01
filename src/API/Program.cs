@@ -30,19 +30,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 
     using var scope = app.Services.CreateScope();
-
-    var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-
-    var configuration = builder.Configuration;
-
-    var useInMemoryDB = configuration.GetSection("UseInMemoryDatabase").Value;
-
-    if (!bool.Parse(useInMemoryDB!))
-    {
-        dbContext.Database.Migrate();
-    }
-
     var initialiser = scope.ServiceProvider.GetRequiredService<ApplicationDbContextInitialiser>();
+    await initialiser.InitialiseAsync();
     await initialiser.SeedAsync();
 }
 

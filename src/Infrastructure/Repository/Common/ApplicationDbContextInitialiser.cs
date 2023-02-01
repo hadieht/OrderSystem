@@ -1,6 +1,7 @@
 ﻿using Ardalis.GuardClauses;
 using Domain.Entities;
 using Domain.Enums;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace Infrastructure.Repository.Common;
@@ -18,6 +19,21 @@ public class ApplicationDbContextInitialiser
         this.context = Guard.Against.Null(context, nameof(context)); ;
     }
 
+    public async Task InitialiseAsync()
+    {
+        try
+        {
+            if (context.Database.IsSqlServer())
+            {
+                await context.Database.MigrateAsync();
+            }
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "An error occurred while initialising the database.");
+            throw;
+        }
+    }
     public async Task SeedAsync()
     {
         try

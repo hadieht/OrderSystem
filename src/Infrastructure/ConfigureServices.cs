@@ -16,7 +16,7 @@ public static class ConfigureServices
 
         var useInMemoryDB = configuration.GetSection("UseInMemoryDatabase").Value;
 
-        if (bool.Parse(useInMemoryDB))
+        if (bool.Parse(useInMemoryDB!))
         {
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseInMemoryDatabase("OrderSystem"));

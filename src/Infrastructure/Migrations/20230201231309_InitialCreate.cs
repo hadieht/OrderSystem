@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -16,14 +17,14 @@ namespace Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    OrderNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    OrderID = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CustomerName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CustomerEmail = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PostalCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CustomerName = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    CustomerEmail = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
+                    PostalCode = table.Column<string>(type: "nvarchar(8)", maxLength: 8, nullable: true),
                     HouseNumber = table.Column<int>(type: "int", nullable: true),
-                    Extra = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Extra = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
+                    Status = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Created = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LastModified = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
@@ -38,7 +39,7 @@ namespace Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ProductType = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ProductType = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Width = table.Column<double>(type: "float", nullable: false)
                 },
                 constraints: table =>

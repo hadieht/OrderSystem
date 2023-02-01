@@ -3,6 +3,8 @@ using API.Http;
 using Application;
 using Infrastructure;
 using Infrastructure.Repository.Common;
+using Microsoft.EntityFrameworkCore;
+using static CSharpFunctionalExtensions.Result;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,6 +30,18 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 
     using var scope = app.Services.CreateScope();
+
+    var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+
+    var configuration = builder.Configuration;
+
+    var useInMemoryDB = configuration.GetSection("UseInMemoryDatabase").Value;
+
+    if (!bool.Parse(useInMemoryDB!))
+    {
+        dbContext.Database.Migrate();
+    }
+
     var initialiser = scope.ServiceProvider.GetRequiredService<ApplicationDbContextInitialiser>();
     await initialiser.SeedAsync();
 }

@@ -7,7 +7,7 @@ namespace Domain.Entities;
 
 public class Order : BaseAuditableEntity
 {
-    public string OrderNumber { get; private set; }
+    public string OrderID { get; private set; }
 
     public DateTime OrderDate { get; private set; }
 
@@ -24,13 +24,13 @@ public class Order : BaseAuditableEntity
 
     }
 
-    public Order(string orderNumber,
+    public Order(string orderID,
                     DateTime orderDate,
                     string customerName,
                     Email customerEmail,
                     Address address) : base()
     {
-        OrderNumber= Guard.Against.Null(orderNumber, nameof(orderNumber));
+        OrderID= Guard.Against.Null(orderID, nameof(orderID));
         OrderDate= Guard.Against.Null(orderDate, nameof(orderDate));
         CustomerName=Guard.Against.NullOrEmpty(customerName, nameof(customerName));
         CustomerEmail=Guard.Against.Null(customerEmail, nameof(customerEmail));

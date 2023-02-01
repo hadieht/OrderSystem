@@ -54,8 +54,8 @@ public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, Cre
 
         var result = new CreateOrderResponse
         {
-            OrderNumber = orderInserted.OrderNumber,
-            BinWidth = widthCalculator.BinWidthDisplay(order.Items)
+            OrderNumber = orderInserted.OrderID,
+            RequiredBinWidth = widthCalculator.BinWidthDisplay(order.Items)
         };
 
         return result;

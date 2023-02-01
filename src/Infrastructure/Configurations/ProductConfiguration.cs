@@ -12,7 +12,8 @@ namespace Infrastructure.Configurations
         {
             builder.ToTable($"{nameof(Product)}s").HasKey(k => k.Id);
 
-            builder.Property(t => t.ProductType).IsRequired();
+            builder.Property(t => t.ProductType).IsRequired()
+                                                        .HasMaxLength(50);
 
             builder.Property(t => t.Width).IsRequired();
 

@@ -21,7 +21,7 @@ public class MappingProfile : Profile
              .ForMember(dest => dest.AddressExtra, opts => opts.MapFrom(src => src.Address.Extra))
              .ForMember(dest => dest.OrderDate, opts => opts.MapFrom(src => src.OrderDate.ToLocalTime().ToShortDateString()))
              .ForMember(dest => dest.Status, opts => opts.MapFrom(src => src.Status))
-             .ForMember(dest => dest.BinWidth, m => m.Ignore());
+             .ForMember(dest => dest.RequiredBinWidth, m => m.Ignore());
 
 
         CreateMap<Domain.Entities.Order, GetOrderListResponse>()

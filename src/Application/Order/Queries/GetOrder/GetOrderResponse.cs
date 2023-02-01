@@ -20,7 +20,7 @@ namespace Application.Order.Queries.GetOrder
 
         public OrderStatus Status { get; set; }
 
-        public string BinWidth { get; set; }
+        public string RequiredBinWidth { get; set; }
 
         public List<GetOrderItemResponse> Items { get; set; }
     }

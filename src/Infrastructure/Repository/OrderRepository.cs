@@ -13,10 +13,10 @@ public class OrderRepository : Repository<Domain.Entities.Order>, IOrderReposito
         this.dbContext= context;
     }
 
-    public async Task<Order> GetOrderWithItemAsync(string orderNumber)
+    public async Task<Order> GetOrderWithItemAsync(string orderID)
     {
         return await dbContext.Orders
-                        .Where(a => a.OrderNumber== orderNumber)
+                        .Where(a => a.OrderID== orderID)
                         .Include(a => a.Items)
                         .ThenInclude(a => a.Product)
                         .FirstOrDefaultAsync();

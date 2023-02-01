@@ -40,12 +40,12 @@ public class OrderController : ApiControllerBase
 
     [ProducesResponseType(typeof(GetOrderResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    [HttpGet("{orderNumber}")] // GET api/order/9333f0a39ab7488ca006b2bd8f8ff740
-    public async Task<IActionResult> Get([FromRoute][NotNull] string orderNumber)
+    [HttpGet("{orderID}")] // GET api/order/9333f0a39ab7488ca006b2bd8f8ff740
+    public async Task<IActionResult> Get([FromRoute][NotNull] string orderID)
     {
         var request = new GetOrdersCommand
         {
-            OrderNumber = orderNumber,
+            OrderID = orderID,
         };
         var result = await Mediator.Send(request);
 
@@ -58,12 +58,12 @@ public class OrderController : ApiControllerBase
     }
 
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    [HttpDelete("{orderNumber}")]    // DELETE api/order/9333f0a39ab7488ca006b2bd8f8ff740
-    public async Task<IActionResult> Delete([FromRoute][NotNull] string orderNumber)
+    [HttpDelete("{orderID}")]    // DELETE api/order/9333f0a39ab7488ca006b2bd8f8ff740
+    public async Task<IActionResult> Delete([FromRoute][NotNull] string orderID)
     {
         var request = new DeleteOrderCommand
         {
-            OrderNumber = orderNumber,
+            OrderNumber = orderID,
         };
         await Mediator.Send(request);
 
@@ -71,13 +71,13 @@ public class OrderController : ApiControllerBase
     }
 
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    [HttpPut("update/{orderNumber}")] // PUT api/order/9333f0a39ab7488ca006b2bd8f8ff740
+    [HttpPut("update/{orderID}")] // PUT api/order/9333f0a39ab7488ca006b2bd8f8ff740
 
-    public async Task<IActionResult> UpdateOrder([FromRoute][NotNull] string orderNumber, [FromBody] UpdateOrderRequest request)
+    public async Task<IActionResult> UpdateOrder([FromRoute][NotNull] string orderID, [FromBody] UpdateOrderRequest request)
     {
         var command = new UpdateOrderCommand
         {
-            OrderNumber = orderNumber,
+            OrderNumber = orderID,
             CustomerName= request.CustomerName,
             Address= request.Address,
             Email = request.Email
@@ -89,12 +89,12 @@ public class OrderController : ApiControllerBase
     }
 
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    [HttpPatch("cancel/{orderNumber}")]   // PUT api/order/9333f0a39ab7488ca006b2bd8f8ff740
-    public async Task<IActionResult> CancelOrder([FromRoute][NotNull] string orderNumber)
+    [HttpPatch("cancel/{orderID}")]   // PUT api/order/9333f0a39ab7488ca006b2bd8f8ff740
+    public async Task<IActionResult> CancelOrder([FromRoute][NotNull] string orderID)
     {
         var request = new CancelOrderCommand
         {
-            OrderNumber = orderNumber,
+            OrderNumber = orderID,
         };
         await Mediator.Send(request);
 

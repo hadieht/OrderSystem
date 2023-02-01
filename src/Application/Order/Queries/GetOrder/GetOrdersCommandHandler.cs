@@ -23,11 +23,11 @@ public class GetOrdersCommandHandler : IRequestHandler<GetOrdersCommand, Result<
     }
     public async Task<Result<GetOrderResponse>> Handle(GetOrdersCommand request, CancellationToken cancellationToken)
     {
-        var order = await orderRepository.GetOrderWithItemAsync(request.OrderNumber);
+        var order = await orderRepository.GetOrderWithItemAsync(request.OrderID);
 
         var result = mapper.Map<GetOrderResponse>(order);
 
-        result.BinWidth = widthCalculator.BinWidthDisplay(order.Items);
+        result.RequiredBinWidth = widthCalculator.BinWidthDisplay(order.Items);
 
         return Result.Success(result);
     }

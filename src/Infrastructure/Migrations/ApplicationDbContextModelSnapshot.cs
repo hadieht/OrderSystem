@@ -34,11 +34,13 @@ namespace Infrastructure.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("CustomerEmail")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("CustomerName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<DateTime?>("LastModified")
                         .HasColumnType("datetime2");
@@ -46,13 +48,15 @@ namespace Infrastructure.Migrations
                     b.Property<DateTime>("OrderDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("OrderNumber")
+                    b.Property<string>("OrderID")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Status")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
 
@@ -95,7 +99,8 @@ namespace Infrastructure.Migrations
 
                     b.Property<string>("ProductType")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<double>("Width")
                         .HasColumnType("float");
@@ -113,7 +118,8 @@ namespace Infrastructure.Migrations
                                 .HasColumnType("int");
 
                             b1.Property<string>("Extra")
-                                .HasColumnType("nvarchar(max)")
+                                .HasMaxLength(10)
+                                .HasColumnType("nvarchar(10)")
                                 .HasColumnName("Extra");
 
                             b1.Property<int>("HouseNumber")
@@ -121,7 +127,8 @@ namespace Infrastructure.Migrations
                                 .HasColumnName("HouseNumber");
 
                             b1.Property<string>("PostalCode")
-                                .HasColumnType("nvarchar(max)")
+                                .HasMaxLength(8)
+                                .HasColumnType("nvarchar(8)")
                                 .HasColumnName("PostalCode");
 
                             b1.HasKey("OrderId");

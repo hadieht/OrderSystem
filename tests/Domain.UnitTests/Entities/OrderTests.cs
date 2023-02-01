@@ -9,7 +9,7 @@ namespace OrderSystem.Domain.UnitTests.Entities
     { 
 
         [Test]
-        [TestCase("orderNumber")]
+        [TestCase("orderID")]
         [TestCase("orderDate")]
         [TestCase("customerName")]
         [TestCase("customerEmail")]
@@ -18,7 +18,7 @@ namespace OrderSystem.Domain.UnitTests.Entities
         {
             var datetime = DateTime.Now;
             var exception = Assert.Throws<NotSupportedException>(() =>
-                            new Order(parameterName == "orderNumber" ? null : "number",
+                            new Order(parameterName == "orderID" ? null : "number",
                                                datetime,
                                                parameterName == "customerName" ? null : "name",
                                                parameterName == "customerEmail" ? null : new Mock<Email>().Object,

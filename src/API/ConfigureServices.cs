@@ -8,8 +8,6 @@ namespace API;
 
 public static class ConfigureServices
 {
-    public static string LogFolder = "Logs6";
-
     public static IServiceCollection AddAPIServices(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddHttpContextAccessor();
@@ -19,7 +17,6 @@ public static class ConfigureServices
         // Customise default API behaviour
         services.Configure<ApiBehaviorOptions>(options =>
             options.SuppressModelStateInvalidFilter = true);
-
 
         services.AddDistributedMemoryCache();
 

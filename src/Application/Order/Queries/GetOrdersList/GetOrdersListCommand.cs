@@ -1,6 +1,4 @@
-﻿using Application.Calculator;
-using Application.Common.Interfaces;
-using Application.Repositories;
+﻿using Application.Repositories;
 using Ardalis.GuardClauses;
 using AutoMapper;
 using CSharpFunctionalExtensions;
@@ -21,7 +19,7 @@ public class GetAllOrdersCommandHandler : IRequestHandler<GetOrdersListCommand, 
             IMapper mapper)
     {
         this.orderRepository=Guard.Against.Null(orderRepository, nameof(IOrderRepository));
-        this.mapper = Guard.Against.Null(mapper, nameof(IMapper)); 
+        this.mapper = Guard.Against.Null(mapper, nameof(IMapper));
     }
     public async Task<Result<List<GetOrderListResponse>>> Handle(GetOrdersListCommand request, CancellationToken cancellationToken)
     {

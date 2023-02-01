@@ -23,7 +23,7 @@ public class GetOrdersCommandHandler : IRequestHandler<GetOrdersCommand, Result<
             IMapper mapper)
     {
         this.orderRepository=Guard.Against.Null(orderRepository, nameof(IOrderRepository));
-        this.widthCalculator=Guard.Against.Null(widthCalculator, nameof(IWidthCalculator)); 
+        this.widthCalculator=Guard.Against.Null(widthCalculator, nameof(IWidthCalculator));
         this.mapper = Guard.Against.Null(mapper, nameof(IMapper)); ;
     }
     public async Task<Result<GetOrderResponse>> Handle(GetOrdersCommand request, CancellationToken cancellationToken)

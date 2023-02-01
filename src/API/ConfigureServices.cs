@@ -27,12 +27,13 @@ public static class ConfigureServices
 
         services.AddAutoMapper(Assembly.GetAssembly(typeof(MappingProfile)));
 
-        services.AddControllers().AddJsonOptions(x => {
+        services.AddControllers().AddJsonOptions(x =>
+        {
             x.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
         });
 
         return services;
     }
 
-    
+
 }

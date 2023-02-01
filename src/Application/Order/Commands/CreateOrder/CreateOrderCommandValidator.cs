@@ -1,6 +1,5 @@
 ﻿using Application.Common.Models;
 using FluentValidation;
-using MediatR;
 
 namespace Application.Order.Commands.CreateOrder
 {

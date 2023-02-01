@@ -12,6 +12,6 @@ namespace Domain.Events
             OrderId = orderId;
             NewEmail = newEmail;
         }
-       
+
     }
 }

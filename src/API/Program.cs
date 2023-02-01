@@ -3,7 +3,6 @@ using API.Http;
 using Application;
 using Infrastructure;
 using Infrastructure.Repositry.Common;
-using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -1,5 +1,4 @@
-﻿using Application.Common.Interfaces;
-using Application.Repositories;
+﻿using Application.Repositories;
 using Infrastructure.Common;
 
 using Infrastructure.Repositry;

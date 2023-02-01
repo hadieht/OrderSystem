@@ -1,5 +1,4 @@
-﻿using Application.Common.Interfaces;
-using Application.Repositories;
+﻿using Application.Repositories;
 using Ardalis.GuardClauses;
 using AutoMapper;
 using CSharpFunctionalExtensions;
@@ -20,7 +19,7 @@ public class GetAllProductsCommandHandler : IRequestHandler<GetAllProductsComman
             IMapper mapper)
     {
         this.productRepository = Guard.Against.Null(productRepository, nameof(IReadOnlyProductRepository)); ;
-        this.mapper = Guard.Against.Null(mapper, nameof(IMapper)); 
+        this.mapper = Guard.Against.Null(mapper, nameof(IMapper));
     }
     public async Task<Result<List<GetProductsResponse>>> Handle(GetAllProductsCommand command, CancellationToken cancellationToken)
     {

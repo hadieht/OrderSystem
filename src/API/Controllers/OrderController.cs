@@ -19,7 +19,7 @@ public class OrderController : ApiControllerBase
     {
         var result = await Mediator.Send(new GetOrdersListCommand());
 
-        if (result.IsSuccess && (result.Value == null || !result.Value.Any()) )
+        if (result.IsSuccess && (result.Value == null || !result.Value.Any()))
         {
             return NoContent();
         }

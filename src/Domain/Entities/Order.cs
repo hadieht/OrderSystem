@@ -2,7 +2,6 @@
 using CSharpFunctionalExtensions;
 using Domain.Common;
 using Domain.Events;
-using System.Xml.Linq;
 
 namespace Domain.Entities;
 

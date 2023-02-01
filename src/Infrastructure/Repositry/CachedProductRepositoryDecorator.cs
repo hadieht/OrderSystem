@@ -1,5 +1,4 @@
-﻿using Application.Common.Interfaces;
-using Application.Repositories;
+﻿using Application.Repositories;
 using CSharpFunctionalExtensions;
 using Domain.Entities;
 using Infrastructure.Common;

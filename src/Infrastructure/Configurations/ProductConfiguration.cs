@@ -21,7 +21,7 @@ namespace Infrastructure.Configurations
                         v => (ProductType)Enum.Parse(typeof(ProductType), v));
 
             builder.Property(e => e.ProductType).HasConversion(converter);
-  
+
         }
     }
 }

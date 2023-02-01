@@ -29,7 +29,7 @@ public class CancelOrderCommandHandler : IRequestHandler<CancelOrderCommand, boo
             throw new NotFoundException("Order not found!");
         }
 
-        if(order.Status == Domain.Enums.OrderStatus.Canceled)
+        if (order.Status == Domain.Enums.OrderStatus.Canceled)
         {
             throw new ValidationException("Order already has cancel status", nameof(Domain.Enums.OrderStatus));
         }
@@ -40,7 +40,7 @@ public class CancelOrderCommandHandler : IRequestHandler<CancelOrderCommand, boo
         }
 
         order.CancelOrder();
-        
+
         await orderRepository.UpdateAsync(order);
 
         return true;

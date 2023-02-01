@@ -2,7 +2,7 @@
 
 namespace Application.Common.Interfaces
 {
-    public interface IReadOnlyRepository<TEntity> where TEntity :  BaseEntity
+    public interface IReadOnlyRepository<TEntity> where TEntity : BaseEntity
     {
         Task<IEnumerable<TEntity>> GetAllAsync();
 

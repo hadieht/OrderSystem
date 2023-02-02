@@ -3,8 +3,6 @@ using API.Http;
 using Application;
 using Infrastructure;
 using Infrastructure.Repository.Common;
-using Microsoft.EntityFrameworkCore;
-using static CSharpFunctionalExtensions.Result;
 
 var builder = WebApplication.CreateBuilder(args);
 

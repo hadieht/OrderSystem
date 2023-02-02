@@ -7,6 +7,10 @@ public class Email : ValueObject
 {
     public string Value { get; }
 
+    protected Email()
+    {
+
+    }
     private Email(string value)
     {
         Value = value;
@@ -22,7 +26,7 @@ public class Email : ValueObject
         if (email.Length > 200)
             return Result.Failure<Email>("Email is too long");
 
-        if (!Regex.IsMatch(email, @"^(.+)@(.+)$"))
+        if (!Regex.IsMatch(email, @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$", RegexOptions.IgnoreCase))
             return Result.Failure<Email>("Email is invalid");
 
         return Result.Success(new Email(email));

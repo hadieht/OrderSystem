@@ -19,6 +19,10 @@ public class Order : BaseAuditableEntity
 
     public OrderStatus Status { get; private set; }
 
+    private readonly List<OrderItem> items = new List<OrderItem>();
+
+    public virtual IReadOnlyList<OrderItem> Items => items.ToList();
+
     protected Order()
     {
 
@@ -69,21 +73,10 @@ public class Order : BaseAuditableEntity
         return Result.Success(true);
     }
 
-    public Result<bool> AddListOfOrderItem(List<OrderItem> orderItems)
-    {
-        if (orderItems == null)
-            return Result.Failure<bool>("Items is empty");
-
-        items.AddRange(orderItems);
-
-        return Result.Success(true);
-    }
-
     public Result<bool> EditOrder(string customerName,
                                     Email customerEmail,
                                     Address address)
     {
-
         CustomerName=Guard.Against.NullOrEmpty(customerName, nameof(customerName));
         CustomerEmail=Guard.Against.Null(customerEmail, nameof(customerEmail));
         Address= Guard.Against.Null(address, nameof(address));
@@ -104,21 +97,5 @@ public class Order : BaseAuditableEntity
         return Result.Success(true);
     }
 
-    public Result<bool> RemoveOrderItem(OrderItem orderItem)
-    {
-        if (!items.Any())
-        {
-            return Result.Failure<bool>("There is no order item in the list");
-        }
-
-        items.Remove(orderItem);
-
-        return Result.Success(true);
-    }
-
-
-    private readonly List<OrderItem> items = new List<OrderItem>();
-
-    public virtual IReadOnlyList<OrderItem> Items => items.ToList();
 
 }

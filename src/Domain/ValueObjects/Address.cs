@@ -10,7 +10,12 @@ public class Address : ValueObject
 
     public string Extra { get; }
 
-    public static Result<Address> Create(string postalCode, int houseNumber, string extra)
+    protected Address()
+    {
+
+    }
+
+    public static Result<Address> Create(string postalCode, int houseNumber, string extra = "")
     {
         if (string.IsNullOrWhiteSpace(postalCode))
             return Result.Failure<Address>("PostalCode should not be empty");

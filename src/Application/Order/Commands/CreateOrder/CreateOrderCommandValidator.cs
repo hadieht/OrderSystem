@@ -7,6 +7,7 @@ namespace Application.Order.Commands.CreateOrder
     {
         public CreateOrderCommandValidator()
         {
+            RuleFor(a => a).NotNull();
 
             RuleFor(a => a.Email)
              .MaximumLength(200)
@@ -30,6 +31,11 @@ namespace Application.Order.Commands.CreateOrder
 
         private static bool AddressIsValid(Address address)
         {
+            if(address == null)
+            {
+                return false;
+            }
+
             return address.PostalCode != null &&
                  address.HouseNumber > 0;
         }

@@ -1,4 +1,5 @@
 ﻿using API;
+using Domain.Entities;
 using Infrastructure.Repository.Common;
 using MediatR;
 using Microsoft.AspNetCore.Mvc.Testing;
@@ -55,6 +56,20 @@ public class Testing
         var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
 
         return await context.FindAsync<TEntity>(keyValues);
+    }
+
+    public static async Task<Domain.Entities.Order> FindOrder(string orderID)
+       
+    {
+        using var scope = _scopeFactory.CreateScope();
+
+        var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+
+        return await context.Orders
+                 .Where(a => a.OrderID== orderID)
+                 .Include(a => a.Items)
+                 .ThenInclude(a => a.Product)
+                 .FirstOrDefaultAsync();
     }
 
     public static async Task AddAsync<TEntity>(TEntity entity)

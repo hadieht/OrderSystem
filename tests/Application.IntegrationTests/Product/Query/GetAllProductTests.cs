@@ -1,6 +1,4 @@
-﻿using Application.Common.Models;
-using Application.Order.Commands.CreateOrder;
-using Application.Order.Queries.GetOrdersList;
+﻿using Application.Order.Queries.GetOrdersList;
 using Application.Product.Queries;
 using FluentAssertions;
 

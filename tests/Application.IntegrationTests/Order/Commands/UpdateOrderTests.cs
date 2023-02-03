@@ -5,7 +5,6 @@ using Application.Order.Commands.UpdateOrder;
 using FluentAssertions;
 
 using static Application.IntegrationTests.Testing;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace Application.IntegrationTests.Order.Commands;
 public class UpdateOrderTests : BaseTestFixture

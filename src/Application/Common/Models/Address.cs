@@ -9,5 +9,5 @@ public record Address
 
     public string AddressExtra { get; set; }
 
-    
+
 }

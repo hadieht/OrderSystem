@@ -2,11 +2,11 @@
 using Application.Order.Commands.CancelOrder;
 using Application.Order.Commands.CreateOrder;
 using Application.Order.Commands.DeleteOrder;
+using Application.Order.Commands.UpdateOrder;
 using Application.Order.Queries.GetOrder;
 using Application.Order.Queries.GetOrdersList;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics.CodeAnalysis;
-using Application.Order.Commands.UpdateOrder;
 
 namespace API.Controllers;
 
@@ -34,9 +34,17 @@ public class OrderController : ApiControllerBase
     [ProducesResponseType(typeof(CreateOrderResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    public async Task<IActionResult> Post([FromBody] CreateOrderCommand request)
+    public async Task<IActionResult> Post([FromBody] CreateOrderRequest request)
     {
-        var result = await Mediator.Send(request);
+        var createOrderCommand = new CreateOrderCommand()
+        {
+            CustomerName = request.CustomerName,
+            Address = request.Address,
+            Email = request.Email,
+            Items = request.Items
+        };
+
+        var result = await Mediator.Send(createOrderCommand);
 
         return Ok(result);
     }

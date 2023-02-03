@@ -31,7 +31,7 @@ namespace Application.Order.Commands.CreateOrder
 
         private static bool AddressIsValid(Address address)
         {
-            if(address == null)
+            if (address == null)
             {
                 return false;
             }

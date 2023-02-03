@@ -1,9 +1,7 @@
 ﻿using Application.Common.Exceptions;
 using Application.Common.Models;
-using Application.Order.Commands.CancelOrder;
 using Application.Order.Commands.CreateOrder;
 using Application.Order.Queries.GetOrder;
-using Application.Order.Queries.GetOrdersList;
 using FluentAssertions;
 
 using static Application.IntegrationTests.Testing;
@@ -57,7 +55,7 @@ public class GetOrderTests : BaseTestFixture
         };
 
         var result = await SendAsync(query);
-        
+
         result.Should().NotBeNull();
         result.IsSuccess.Should().BeTrue();
         result.Value.Should().NotBeNull();

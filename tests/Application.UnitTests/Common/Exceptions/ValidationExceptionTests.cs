@@ -2,7 +2,7 @@
 using FluentAssertions;
 using FluentValidation.Results;
 using NUnit.Framework;
- 
+
 
 namespace OrderSystem.Application.UnitTests.Common.Exceptions;
 public class ValidationExceptionTests

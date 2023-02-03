@@ -1,9 +1,7 @@
 ﻿using Application.Common.Exceptions;
 using Application.Common.Models;
-using Application.Order.Commands.CancelOrder;
 using Application.Order.Commands.CreateOrder;
 using Application.Order.Commands.DeleteOrder;
-using Domain.Enums;
 using FluentAssertions;
 using static Application.IntegrationTests.Testing;
 

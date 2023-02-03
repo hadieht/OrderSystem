@@ -1,10 +1,5 @@
 ﻿using Domain.ValueObjects;
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OrderSystem.Domain.UnitTests.ValueObjects;
 
@@ -15,7 +10,7 @@ public class EmailTests
     {
         //Arrange
         var emailABCom = "a@b.com";
- 
+
         //Act
         var result = Email.Create(emailABCom);
 
@@ -23,7 +18,7 @@ public class EmailTests
 
         Assert.IsTrue(result.IsSuccess);
         Assert.AreEqual(result.Value.Value, emailABCom);
- 
+
     }
 
     [TestCase("aaa@b")]

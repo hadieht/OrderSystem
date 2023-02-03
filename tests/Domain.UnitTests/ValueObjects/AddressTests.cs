@@ -20,15 +20,15 @@ public class AddressTests
         //Assert
 
         Assert.IsTrue(address.IsSuccess);
-        Assert.AreEqual(address.Value.PostalCode , postCode);
+        Assert.AreEqual(address.Value.PostalCode, postCode);
         Assert.AreEqual(address.Value.HouseNumber, houseNumber);
         Assert.AreEqual(address.Value.Extra, addressExtra);
     }
 
- 
+
     [TestCase("1111AA", -1, "extra")]
-    [TestCase("" ,1 , "extra")]
-    public void Address_NotValidInpute_ReturnFailed(string postCode,int  houseNumber,string  addressExtra)
+    [TestCase("", 1, "extra")]
+    public void Address_NotValidInpute_ReturnFailed(string postCode, int houseNumber, string addressExtra)
     {
         //Act
 

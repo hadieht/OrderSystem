@@ -9,7 +9,7 @@ namespace Application.Order.Commands.UpdateOrder
         {
             RuleFor(a => a).NotNull().NotEmpty();
 
-            RuleFor(a=>a.OrderID).NotNull().NotEmpty();
+            RuleFor(a => a.OrderID).NotNull().NotEmpty();
 
             RuleFor(a => a.Email)
                 .MaximumLength(200)

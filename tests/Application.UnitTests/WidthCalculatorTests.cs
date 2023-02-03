@@ -1,13 +1,7 @@
 ﻿using Application.Calculator;
 using Domain.Entities;
 using Domain.Enums;
-using Domain.ValueObjects;
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OrderSystem.Application.UnitTests;
 

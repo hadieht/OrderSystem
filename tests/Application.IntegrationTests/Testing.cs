@@ -1,12 +1,10 @@
-﻿using API;
-using Domain.Entities;
-using Infrastructure.Repository.Common;
+﻿using Infrastructure.Repository.Common;
 using MediatR;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-  
+
 
 namespace Application.IntegrationTests;
 
@@ -17,7 +15,7 @@ public class Testing
     private static IConfiguration _configuration = null!;
     private static IServiceScopeFactory _scopeFactory = null!;
     //private static Checkpoint _checkpoint = null!;
- 
+
     [OneTimeSetUp]
     public void RunBeforeAnyTests()
     {
@@ -43,9 +41,9 @@ public class Testing
 
     public static async Task ResetState()
     {
-       // await _checkpoint.Reset(_configuration.GetConnectionString("DefaultConnection"));
+        // await _checkpoint.Reset(_configuration.GetConnectionString("DefaultConnection"));
 
-        
+
     }
 
     public static async Task<TEntity?> FindAsync<TEntity>(params object[] keyValues)
@@ -59,7 +57,7 @@ public class Testing
     }
 
     public static async Task<Domain.Entities.Order> FindOrder(string orderID)
-       
+
     {
         using var scope = _scopeFactory.CreateScope();
 

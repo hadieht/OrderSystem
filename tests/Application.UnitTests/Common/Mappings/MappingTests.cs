@@ -7,7 +7,7 @@ namespace OrderSystem.Application.UnitTests.Common.Mappings;
 public class MappingTests
 {
     private readonly IConfigurationProvider configuration;
- 
+
 
     public MappingTests() => configuration = new MapperConfiguration(cfg =>
     {

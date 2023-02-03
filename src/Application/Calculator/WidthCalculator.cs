@@ -7,6 +7,7 @@ namespace Application.Calculator
     public class WidthCalculator : IWidthCalculator
     {
         private static readonly string Measurement = "mm";
+        private static readonly double MaxMugCountInSlide = 4D;
         public double BinWidthCalculator(IEnumerable<OrderItem> orderItems)
         {
             double width = 0;
@@ -15,7 +16,7 @@ namespace Application.Calculator
             {
                 if (item.Product.ProductType == Domain.Enums.ProductType.Mug)
                 {
-                    width += (Math.Ceiling((item.Quantity/4D)) * item.Product.Width);
+                    width += (Math.Ceiling((item.Quantity/MaxMugCountInSlide)) * item.Product.Width);
                 }
                 else
                 {

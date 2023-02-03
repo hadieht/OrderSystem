@@ -10,7 +10,7 @@ public class ProductController : ApiControllerBase
     [HttpGet]
     public async Task<List<GetProductsResponse>> GetAll()
     {
-        var result = await Mediator.Send(new GetAllProductsCommand());
+        var result = await Mediator.Send(new GetAllProductsQuery());
         return result.Value;
     }
 }

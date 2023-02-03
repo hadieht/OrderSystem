@@ -6,18 +6,18 @@ using MediatR;
 
 namespace Application.Order.Queries.GetOrdersList;
 
-public class GetAllOrdersCommandHandler : IRequestHandler<GetOrdersListCommand, Result<List<GetOrderListResponse>>>
+public class GetAllOrdersQueryHandler : IRequestHandler<GetOrdersListQuery, Result<List<GetOrderListResponse>>>
 {
     private readonly IOrderRepository orderRepository;
     private readonly IMapper mapper;
 
-    public GetAllOrdersCommandHandler(IOrderRepository orderRepository,
+    public GetAllOrdersQueryHandler(IOrderRepository orderRepository,
         IMapper mapper)
     {
         this.orderRepository=Guard.Against.Null(orderRepository, nameof(IOrderRepository));
         this.mapper = Guard.Against.Null(mapper, nameof(IMapper));
     }
-    public async Task<Result<List<GetOrderListResponse>>> Handle(GetOrdersListCommand request, CancellationToken cancellationToken)
+    public async Task<Result<List<GetOrderListResponse>>> Handle(GetOrdersListQuery request, CancellationToken cancellationToken)
     {
         var allProducts = await orderRepository.GetAllAsync();
 

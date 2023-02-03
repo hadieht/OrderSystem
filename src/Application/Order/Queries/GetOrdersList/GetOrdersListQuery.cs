@@ -3,6 +3,5 @@ using MediatR;
 
 namespace Application.Order.Queries.GetOrdersList;
 
-public record GetOrdersListCommand : IRequest<Result<List<GetOrderListResponse>>>
-{
-}
+public record GetOrdersListQuery : IRequest<Result<List<GetOrderListResponse>>>;
+ 

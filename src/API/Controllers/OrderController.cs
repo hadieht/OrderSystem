@@ -19,7 +19,7 @@ public class OrderController : ApiControllerBase
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> Get()
     {
-        var result = await Mediator.Send(new GetOrdersListCommand());
+        var result = await Mediator.Send(new GetOrdersListQuery());
 
         if (result.IsSuccess && (result.Value == null || !result.Value.Any()))
         {
@@ -47,7 +47,7 @@ public class OrderController : ApiControllerBase
     [HttpGet("{orderID}")] // GET api/order/9333f0a39ab7488ca006b2bd8f8ff740
     public async Task<IActionResult> Get([FromRoute][NotNull] string orderID)
     {
-        var request = new GetOrdersCommand
+        var request = new GetOrdersQuery
         {
             OrderID = orderID,
         };

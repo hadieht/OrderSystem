@@ -7,13 +7,13 @@ using MediatR;
 
 namespace Application.Order.Queries.GetOrder;
 
-public class GetOrdersCommandHandler : IRequestHandler<GetOrdersCommand, Result<GetOrderResponse>>
+public class GetOrdersQueryHandler : IRequestHandler<GetOrdersQuery, Result<GetOrderResponse>>
 {
     private readonly IOrderRepository orderRepository;
     private readonly IWidthCalculator widthCalculator;
     private readonly IMapper mapper;
 
-    public GetOrdersCommandHandler(IOrderRepository orderRepository,
+    public GetOrdersQueryHandler(IOrderRepository orderRepository,
         IWidthCalculator widthCalculator,
         IMapper mapper)
     {
@@ -21,7 +21,7 @@ public class GetOrdersCommandHandler : IRequestHandler<GetOrdersCommand, Result<
         this.widthCalculator=Guard.Against.Null(widthCalculator, nameof(IWidthCalculator));
         this.mapper = Guard.Against.Null(mapper, nameof(IMapper)); ;
     }
-    public async Task<Result<GetOrderResponse>> Handle(GetOrdersCommand request, CancellationToken cancellationToken)
+    public async Task<Result<GetOrderResponse>> Handle(GetOrdersQuery request, CancellationToken cancellationToken)
     {
         var order = await orderRepository.GetOrderWithItemAsync(request.OrderID);
 

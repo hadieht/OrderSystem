@@ -7,13 +7,16 @@ namespace Application.Order.Commands.UpdateOrder
     {
         public UpdateOrderCommandValidator()
         {
+            RuleFor(a => a).NotNull().NotEmpty();
+
+            RuleFor(a=>a.OrderNumber).NotNull().NotEmpty();
 
             RuleFor(a => a.Email)
-               .MaximumLength(200)
-               .NotEmpty()
-                   .WithMessage("Email address is required.")
-               .EmailAddress()
-                   .WithMessage("A valid email address is required.");
+                .MaximumLength(200)
+                .NotEmpty()
+                .WithMessage("Email address is required.")
+                .EmailAddress()
+                .WithMessage("A valid email address is required.");
 
             RuleFor(a => a.CustomerName).NotEmpty();
 
@@ -24,6 +27,11 @@ namespace Application.Order.Commands.UpdateOrder
 
         private bool AddressIsValid(Address address)
         {
+            if (address == null)
+            {
+                return false;
+            }
+
             return address.PostalCode != null &&
                  address.HouseNumber > 0;
         }

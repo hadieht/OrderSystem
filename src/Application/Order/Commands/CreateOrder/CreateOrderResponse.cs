@@ -2,7 +2,7 @@
 {
     public class CreateOrderResponse
     {
-        public string OrderNumber { get; set; }
+        public string OrderID { get; set; }
         public string RequiredBinWidth { get; set; }
     }
 }

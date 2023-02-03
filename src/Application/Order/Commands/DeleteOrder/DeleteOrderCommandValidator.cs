@@ -8,7 +8,7 @@ namespace Application.Order.Commands.DeleteOrder
         {
             RuleFor(a => a).NotNull().NotEmpty();
 
-            RuleFor(a => a.OrderNumber).NotNull().NotEmpty();
+            RuleFor(a => a.OrderID).NotNull().NotEmpty();
         }
     }
 }

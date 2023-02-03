@@ -5,7 +5,7 @@ namespace Application.Order.Commands.UpdateOrder;
 
 public record UpdateOrderCommand : IRequest<bool>
 {
-    public string OrderNumber { get; set; }
+    public string OrderID { get; set; }
 
     public string CustomerName { get; set; }
 

@@ -25,7 +25,7 @@ public class CreateOrderTests : BaseTestFixture
     }
 
     [Test]
-    public async Task ShouldCreateTodoItem()
+    public async Task CreateOrder_PerformCorrectly()
     {
 
         var command = new CreateOrderCommand
@@ -45,7 +45,7 @@ public class CreateOrderTests : BaseTestFixture
 
         var createOrderResult = await SendAsync(command);
 
-        var item = await FindOrder(createOrderResult.OrderNumber);
+        var item = await FindOrder(createOrderResult.OrderID);
 
         item.Should().NotBeNull();
 
@@ -54,9 +54,9 @@ public class CreateOrderTests : BaseTestFixture
         item.Address.HouseNumber.Should().Be(command.Address.HouseNumber);
         item.Address.PostalCode.Should().Be(command.Address.PostalCode);
 
-        item.Items.First().Should().NotBeNull();
-        item.Items.First().Product.ProductType.Should().Be(command.Items.First().ProductType);
-        item.Items.First().Quantity.Should().Be(command.Items.First().Quantity);
+        item.Items.FirstOrDefault().Should().NotBeNull();
+        item.Items.FirstOrDefault()!.Product.ProductType.Should().Be(command.Items.First().ProductType);
+        item.Items.FirstOrDefault()!.Quantity.Should().Be(command.Items.First().Quantity);
         item.Created.Should().BeCloseTo(DateTime.Now, TimeSpan.FromMilliseconds(10000));
         item.LastModified.Should().BeCloseTo(DateTime.Now, TimeSpan.FromMilliseconds(10000));
     }

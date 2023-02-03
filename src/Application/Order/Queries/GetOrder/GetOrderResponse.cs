@@ -4,7 +4,7 @@ namespace Application.Order.Queries.GetOrder
 {
     public class GetOrderResponse
     {
-        public string OrderNumber { get; set; }
+        public string OrderID { get; set; }
 
         public DateTime OrderDate { get; set; }
 

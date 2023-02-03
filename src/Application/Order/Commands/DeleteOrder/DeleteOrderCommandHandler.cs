@@ -15,7 +15,7 @@ public class DeleteOrderCommandHandler : IRequestHandler<DeleteOrderCommand, boo
     public async Task<bool> Handle(DeleteOrderCommand command, CancellationToken cancellationToken)
     {
 
-        var order = await orderRepository.GetOrderWithItemAsync(command.OrderNumber);
+        var order = await orderRepository.GetOrderWithItemAsync(command.OrderID);
 
         if (order== null)
         {

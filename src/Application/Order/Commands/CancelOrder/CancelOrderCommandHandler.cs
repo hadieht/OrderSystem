@@ -17,7 +17,7 @@ public class CancelOrderCommandHandler : IRequestHandler<CancelOrderCommand, boo
     public async Task<bool> Handle(CancelOrderCommand command, CancellationToken cancellationToken)
     {
 
-        var order = await orderRepository.GetOrderWithItemAsync(command.OrderNumber);
+        var order = await orderRepository.GetOrderWithItemAsync(command.OrderID);
 
         ValidateOrder(order);
 

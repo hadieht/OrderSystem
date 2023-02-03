@@ -33,7 +33,7 @@ public class UpdateOrderCommandHandler : IRequestHandler<UpdateOrderCommand, boo
             throw new ValidationException(addressResult.Error, nameof(Address));
         }
 
-        var order = await orderRepository.GetOrderWithItemAsync(command.OrderNumber);
+        var order = await orderRepository.GetOrderWithItemAsync(command.OrderID);
 
         if (order== null)
         {

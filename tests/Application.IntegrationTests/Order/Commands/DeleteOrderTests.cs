@@ -25,7 +25,7 @@ public class DeleteOrderTests : BaseTestFixture
     {
         var command = new DeleteOrderCommand()
         {
-            OrderNumber = ""
+            OrderID = ""
         };
         await FluentActions.Invoking(() => SendAsync(command)).Should().ThrowAsync<ValidationException>();
     }
@@ -53,12 +53,12 @@ public class DeleteOrderTests : BaseTestFixture
 
         var cancelCommand = new DeleteOrderCommand()
         {
-            OrderNumber = createOrderResult.OrderNumber
+            OrderID = createOrderResult.OrderID
         };
 
         var cancelOrderResult = await SendAsync(cancelCommand);
 
-        var item = await FindOrder(createOrderResult.OrderNumber);
+        var item = await FindOrder(createOrderResult.OrderID);
 
         item.Should().BeNull();
 

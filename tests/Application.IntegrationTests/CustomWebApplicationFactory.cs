@@ -1,4 +1,5 @@
-﻿using Infrastructure.Repository.Common;
+﻿using Infrastructure.Common;
+using Infrastructure.Repository.Common;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
@@ -25,6 +26,8 @@ internal class CustomWebApplicationFactory : WebApplicationFactory<Program>
 
         builder.ConfigureServices((builder, services) =>
         {
+            services.AddScoped<AuditableEntitySaveChangesInterceptor>();
+
             services
                 .Remove<DbContextOptions<ApplicationDbContext>>()
                 .AddDbContext<ApplicationDbContext>((sp, options) =>

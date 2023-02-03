@@ -4,5 +4,5 @@ namespace Application.Order.Commands.DeleteOrder;
 
 public record DeleteOrderCommand : IRequest<bool>
 {
-    public string OrderNumber { get; set; }
+    public string OrderID { get; set; }
 }

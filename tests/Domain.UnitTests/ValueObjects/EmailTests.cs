@@ -22,7 +22,7 @@ public class EmailTests
         //Assert
 
         Assert.IsTrue(result.IsSuccess);
-        Assert.AreEqual(result.Value, emailABCom);
+        Assert.AreEqual(result.Value.Value, emailABCom);
  
     }
 

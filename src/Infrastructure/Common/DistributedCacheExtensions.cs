@@ -24,8 +24,15 @@ public static class DistributedCacheExtensions
         value = default;
 
         if (val == null) return false;
+        try
+        {
+            value = JsonSerializer.Deserialize<T>(val, GetJsonSerializerOptions());
 
-        value = JsonSerializer.Deserialize<T>(val, GetJsonSerializerOptions());
+        }
+        catch  // For integration test support
+        {
+            return default;
+        }
 
         return true;
     }

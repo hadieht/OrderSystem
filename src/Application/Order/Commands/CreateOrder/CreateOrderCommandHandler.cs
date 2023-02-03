@@ -40,7 +40,7 @@ public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, Cre
             throw new ValidationException(addressResult.Error, nameof(Address));
         }
 
-        var order = new Domain.Entities.Order(GetOrderNumber(),
+        var order = new Domain.Entities.Order(GetOrderID(),
             DateTime.UtcNow,
             command.CustomerName,
             emailResult.Value,
@@ -54,7 +54,7 @@ public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, Cre
 
         var result = new CreateOrderResponse
         {
-            OrderNumber = orderInserted.OrderID,
+            OrderID = orderInserted.OrderID,
             RequiredBinWidth = widthCalculator.BinWidthDisplay(order.Items)
         };
 
@@ -80,7 +80,7 @@ public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, Cre
         }
     }
 
-    private string GetOrderNumber()
+    private string GetOrderID()
     {
         return Guid.NewGuid().ToString().Replace("-", "");
     }

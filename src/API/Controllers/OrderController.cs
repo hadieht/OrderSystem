@@ -68,7 +68,7 @@ public class OrderController : ApiControllerBase
     {
         var request = new DeleteOrderCommand
         {
-            OrderNumber = orderID,
+            OrderID = orderID,
         };
         await Mediator.Send(request);
 
@@ -84,7 +84,7 @@ public class OrderController : ApiControllerBase
     {
         var command = new UpdateOrderCommand
         {
-            OrderNumber = orderID,
+            OrderID = orderID,
             CustomerName= request.CustomerName,
             Address= request.Address,
             Email = request.Email
@@ -102,7 +102,7 @@ public class OrderController : ApiControllerBase
     {
         var request = new CancelOrderCommand
         {
-            OrderNumber = orderID,
+            OrderID = orderID,
         };
         await Mediator.Send(request);
 

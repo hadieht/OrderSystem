@@ -1,4 +1,5 @@
 ﻿using Domain.ValueObjects;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace OrderSystem.Domain.UnitTests.ValueObjects;
@@ -18,11 +19,10 @@ public class AddressTests
         var address = Address.Create(postCode, houseNumber, addressExtra);
 
         //Assert
-
-        Assert.IsTrue(address.IsSuccess);
-        Assert.AreEqual(address.Value.PostalCode, postCode);
-        Assert.AreEqual(address.Value.HouseNumber, houseNumber);
-        Assert.AreEqual(address.Value.Extra, addressExtra);
+        address.IsSuccess.Should().BeTrue();
+        address.Value.PostalCode.Should().Be(postCode);
+        address.Value.HouseNumber.Should().Be(houseNumber);
+        address.Value.Extra.Should().Be(addressExtra);
     }
 
 
@@ -35,8 +35,8 @@ public class AddressTests
         var address = Address.Create(postCode, houseNumber, addressExtra);
 
         //Assert
-        Assert.IsTrue(address.IsFailure);
-        Assert.IsFalse(string.IsNullOrEmpty(address.Error));
+        address.IsFailure.Should().BeTrue();
+        string.IsNullOrEmpty(address.Error).Should().BeFalse();
     }
 }
 

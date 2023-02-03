@@ -1,5 +1,6 @@
 ﻿using Domain.Entities;
 using Domain.Enums;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace OrderSystem.Domain.UnitTests.Entities;
@@ -18,11 +19,9 @@ public class ProductTests
         var result = Product.Create(productType, width);
 
         //Assert
-
-        Assert.NotNull(result);
-
-        Assert.AreEqual(result.ProductType, productType);
-        Assert.AreEqual(result.Width, width);
+        result.Should().NotBeNull();
+        result.ProductType.Should().Be(productType);
+        result.Width.Should().Be(width);
 
     }
 }

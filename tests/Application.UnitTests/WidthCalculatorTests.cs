@@ -1,6 +1,7 @@
 ﻿using Application.Calculator;
 using Domain.Entities;
 using Domain.Enums;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace OrderSystem.Application.UnitTests;
@@ -12,7 +13,6 @@ public class WidthCalculatorTests
     public void Calculator_WithFewItem()
     {
         //Arrange
-
         var listOrderItems = new List<OrderItem>()
         {
            new OrderItem(1 , Product.Create(ProductType.PhotoBook, 1)),
@@ -27,8 +27,7 @@ public class WidthCalculatorTests
         var result = calculator.BinWidthCalculator(listOrderItems);
 
         //Assert
-
-        Assert.AreEqual(result, 4);
+        result.Should().Be(4);
     }
 
 
@@ -36,7 +35,6 @@ public class WidthCalculatorTests
     public void Calculator_WithMoreMugs()
     {
         //Arrange
-
         var listOrderItems = new List<OrderItem>()
         {
            new OrderItem(1 , Product.Create(ProductType.PhotoBook, 1)),
@@ -51,7 +49,6 @@ public class WidthCalculatorTests
         var result = calculator.BinWidthCalculator(listOrderItems);
 
         //Assert
-
-        Assert.AreEqual(result, 5);
+        result.Should().Be(5);
     }
 }

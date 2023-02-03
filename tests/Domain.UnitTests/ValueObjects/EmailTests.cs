@@ -1,4 +1,5 @@
 ﻿using Domain.ValueObjects;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace OrderSystem.Domain.UnitTests.ValueObjects;
@@ -15,9 +16,8 @@ public class EmailTests
         var result = Email.Create(emailABCom);
 
         //Assert
-
-        Assert.IsTrue(result.IsSuccess);
-        Assert.AreEqual(result.Value.Value, emailABCom);
+        result.IsSuccess.Should().BeTrue();
+        result.Value.Value.Should().Be(emailABCom);
 
     }
 
@@ -28,12 +28,11 @@ public class EmailTests
     public void Address_NotValidInpute_ReturnFailed(string email)
     {
         //Act
-
         var result = Email.Create(email);
 
         //Assert
-        Assert.IsTrue(result.IsFailure);
-        Assert.IsFalse(string.IsNullOrEmpty(result.Error));
+        result.IsFailure.Should().BeTrue();
+        string.IsNullOrEmpty(result.Error).Should().BeFalse();
     }
 }
 

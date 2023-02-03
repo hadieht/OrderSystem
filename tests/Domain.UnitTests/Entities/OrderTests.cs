@@ -1,6 +1,7 @@
 ﻿using Domain.Entities;
 using Domain.Enums;
 using Domain.ValueObjects;
+using FluentAssertions;
 using Moq;
 using NUnit.Framework;
 
@@ -47,10 +48,9 @@ public class OrderTests
         var result = order.AddOrderItem(orderItem);
 
         //Assert
-
-        Assert.IsTrue(result.IsSuccess);
-        Assert.IsTrue(order.Items.Count()== 1);
-        Assert.AreEqual(order.Items.FirstOrDefault()!.Product, product);
+        result.IsSuccess.Should().BeTrue();
+        order.Items.Should().HaveCount(1);
+        order.Items.FirstOrDefault()!.Product.Should().Be(product);
 
     }
 
@@ -68,13 +68,13 @@ public class OrderTests
         //Act
         var result1 = order.AddOrderItem(orderItemFirst);
         var result2 = order.AddOrderItem(orderItemSecond);
-        //Assert
 
-        Assert.IsTrue(result1.IsSuccess);
-        Assert.IsTrue(result2.IsSuccess);
-        Assert.IsTrue(order.Items.Count()== 1);
-        Assert.AreEqual(order.Items.FirstOrDefault()!.Product, product);
-        Assert.AreEqual(order.Items.FirstOrDefault()!.Quantity, 3);
+        //Assert
+        result1.IsSuccess.Should().BeTrue();
+        result2.IsSuccess.Should().BeTrue();
+        order.Items.Should().HaveCount(1);
+        order.Items.FirstOrDefault()!.Product.Should().Be(product);
+        order.Items.FirstOrDefault()!.Quantity.Should().Be(3);
 
     }
 
@@ -88,23 +88,20 @@ public class OrderTests
         var newEmail = Email.Create("mail@email.com");
 
         //Act
-
         var result = order.EditOrder("newName", newEmail.Value, newAddress.Value);
 
         //Assert
-
-        Assert.IsTrue(result.IsSuccess);
-
-        Assert.AreEqual(order.Address, newAddress.Value);
-        Assert.AreEqual(order.CustomerEmail, newEmail.Value);
-        Assert.AreEqual(order.CustomerName, "newName");
+        result.IsSuccess.Should().BeTrue();
+        order.Address.Should().Be(newAddress.Value);
+        order.CustomerEmail.Should().Be(newEmail.Value);
+        order.CustomerName.Should().Be("newName");
     }
 
     [Test]
     public void ThrowsExceptionGivenNullItem()
     {
         var result = GetSimpleOrder().AddOrderItem(null);
-        Assert.IsTrue(result.IsFailure);
+        result.IsFailure.Should().BeTrue();
     }
 
     private Order GetSimpleOrder()

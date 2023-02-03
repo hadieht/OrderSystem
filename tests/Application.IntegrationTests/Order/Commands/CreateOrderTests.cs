@@ -54,9 +54,9 @@ public class CreateOrderTests : BaseTestFixture
         item.Address.HouseNumber.Should().Be(command.Address.HouseNumber);
         item.Address.PostalCode.Should().Be(command.Address.PostalCode);
 
-        item.Items.FirstOrDefault().Should().NotBeNull();
-        item.Items.FirstOrDefault()!.Product.ProductType.Should().Be(command.Items.First().ProductType);
-        item.Items.FirstOrDefault()!.Quantity.Should().Be(command.Items.First().Quantity);
+        item.Items.First().Should().NotBeNull();
+        item.Items.First().Product.ProductType.Should().Be(command.Items.First().ProductType);
+        item.Items.First().Quantity.Should().Be(command.Items.First().Quantity);
         item.Created.Should().BeCloseTo(DateTime.Now, TimeSpan.FromMilliseconds(10000));
         item.LastModified.Should().BeCloseTo(DateTime.Now, TimeSpan.FromMilliseconds(10000));
     }

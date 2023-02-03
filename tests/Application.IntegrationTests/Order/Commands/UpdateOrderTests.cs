@@ -5,6 +5,7 @@ using Application.Order.Commands.UpdateOrder;
 using FluentAssertions;
 
 using static Application.IntegrationTests.Testing;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace Application.IntegrationTests.Order.Commands;
 public class UpdateOrderTests : BaseTestFixture
@@ -71,6 +72,10 @@ public class UpdateOrderTests : BaseTestFixture
         item.CustomerName.Should().Be(updateCommand.CustomerName);
         item.Address.HouseNumber.Should().Be(updateCommand.Address.HouseNumber);
         item.Address.PostalCode.Should().Be(updateCommand.Address.PostalCode);
+
+        item.Items.First().Should().NotBeNull();
+        item.Items.First().Product.ProductType.Should().Be(createOrderCommand.Items.First().ProductType);
+        item.Items.First().Quantity.Should().Be(createOrderCommand.Items.First().Quantity);
 
     }
 

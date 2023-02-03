@@ -38,9 +38,7 @@ public class OrderTests
     public void Order_AddNewItem_PerformCorrectly()
     {
         //Arrange
-        var email = Email.Create("a@b.com");
-        var address = Address.Create("1111AA", 1, string.Empty);
-        var order = new Order("id", DateTime.Now, "name", email.Value, address.Value);
+        var order = GetSimpleOrder();
         var product = Product.Create(ProductType.Cards, 10);
 
         var orderItem = new OrderItem(1, product);
@@ -61,14 +59,9 @@ public class OrderTests
     public void Order_AddNewItemToExistItem_PerformCorrectly()
     {
         //Arrange
-        var email = Email.Create("a@b.com");
-        var address = Address.Create("1111AA", 1, string.Empty);
-        var order = new Order("id", DateTime.Now, "name", email.Value, address.Value);
-
+        var order = GetSimpleOrder();
         var product = Product.Create(ProductType.Cards, 10);
-
         var orderItemFirst = new OrderItem(1, product);
-
 
         var orderItemSecond = new OrderItem(2, product);
 
@@ -90,14 +83,9 @@ public class OrderTests
     public void Order_EditOrder_PerformCorrectly()
     {
         //Arrange
-        var email = Email.Create("a@b.com");
-        var address = Address.Create("1111AA", 1, "A");
-        var order = new Order("id", DateTime.Now, "name", email.Value, address.Value);
-
-
+        var order = GetSimpleOrder();
         var newAddress = Address.Create("2222BB", 1);
         var newEmail = Email.Create("mail@email.com");
-
 
         //Act
 
@@ -110,7 +98,20 @@ public class OrderTests
         Assert.AreEqual(order.Address, newAddress.Value);
         Assert.AreEqual(order.CustomerEmail, newEmail.Value);
         Assert.AreEqual(order.CustomerName, "newName");
+    }
 
+    [Test]
+    public void ThrowsExceptionGivenNullItem()
+    {
+        var result = GetSimpleOrder().AddOrderItem(null);
+        Assert.IsTrue(result.IsFailure);
+    }
+
+    private Order GetSimpleOrder()
+    {
+        var email = Email.Create("a@b.com");
+        var address = Address.Create("1111AA", 1, string.Empty);
+        return new Order("id", DateTime.Now, "name", email.Value, address.Value);
     }
 }
 

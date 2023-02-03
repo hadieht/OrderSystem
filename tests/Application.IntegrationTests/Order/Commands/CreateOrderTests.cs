@@ -14,10 +14,15 @@ public class CreateOrderTests : BaseTestFixture
     public async Task ShouldRequireMinimumFields()
     {
         var command = new CreateOrderCommand();
-        await FluentActions.Invoking(() => Testing.SendAsync(command)).Should().ThrowAsync<ValidationException>();
+        await FluentActions.Invoking(() => SendAsync(command)).Should().ThrowAsync<ValidationException>();
     }
 
 
+    [Test, TestCaseSource(nameof(CreateCommands))]
+    public async Task CreateCommand_ThrowsException(CreateOrderCommand command)
+    {
+        await FluentActions.Invoking(() => SendAsync(command)).Should().ThrowAsync<ValidationException>();
+    }
 
     [Test]
     public async Task ShouldCreateTodoItem()
@@ -55,5 +60,68 @@ public class CreateOrderTests : BaseTestFixture
         item.Created.Should().BeCloseTo(DateTime.Now, TimeSpan.FromMilliseconds(10000));
         item.LastModified.Should().BeCloseTo(DateTime.Now, TimeSpan.FromMilliseconds(10000));
     }
+
+
+    private static IEnumerable<TestCaseData> CreateCommands()
+    {
+        var address = new Common.Models.Address
+        {
+            PostalCode ="1111AA",
+            HouseNumber=1
+        };
+
+        var email = "e@mail.com";
+
+        var orderItems = new List<OrderItem>
+            {
+                new OrderItem {Quantity = 1 , ProductType= Domain.Enums.ProductType.Cards}
+            };
+
+        var wrongItem = new List<OrderItem>
+            {
+                new OrderItem {Quantity = -1 , ProductType= Domain.Enums.ProductType.Cards}
+            };
+
+        yield return new TestCaseData(new CreateOrderCommand
+        {
+            Address = address,
+            CustomerName = "",
+            Email = email,
+            Items= orderItems
+        });
+
+        yield return new TestCaseData(new CreateOrderCommand
+        {
+            Address = address,
+            CustomerName = "name",
+            Email = string.Empty,
+            Items= orderItems
+        });
+
+        yield return new TestCaseData(new CreateOrderCommand
+        {
+            CustomerName = "name",
+            Email = email,
+            Items= orderItems
+        });
+
+
+        yield return new TestCaseData(new CreateOrderCommand
+        {
+            Address = address,
+            CustomerName = "name",
+            Email = "worngemail",
+            Items= orderItems
+        });
+
+        yield return new TestCaseData(new CreateOrderCommand
+        {
+            Address = address,
+            CustomerName = "name",
+            Email = email,
+            Items= wrongItem
+        });
+    }
+
 
 }

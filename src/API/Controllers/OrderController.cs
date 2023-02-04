@@ -36,6 +36,11 @@ public class OrderController : ApiControllerBase
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> Post([FromBody] CreateOrderRequest request)
     {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+
         var createOrderCommand = new CreateOrderCommand()
         {
             CustomerName = request.CustomerName,
@@ -90,6 +95,11 @@ public class OrderController : ApiControllerBase
 
     public async Task<IActionResult> UpdateOrder([FromRoute][NotNull] string orderID, [FromBody] UpdateOrderRequest request)
     {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+
         var command = new UpdateOrderCommand
         {
             OrderID = orderID,

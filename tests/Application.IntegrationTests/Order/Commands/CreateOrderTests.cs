@@ -7,7 +7,6 @@ using static Application.IntegrationTests.Testing;
 
 namespace Application.IntegrationTests.Order.Commands;
 
-
 public class CreateOrderTests : BaseTestFixture
 {
     [Test]

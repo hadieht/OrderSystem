@@ -14,7 +14,7 @@ public class Testing
     private static WebApplicationFactory<Program> _factory = null!;
     private static IConfiguration _configuration = null!;
     private static IServiceScopeFactory _scopeFactory = null!;
-    //private static Checkpoint _checkpoint = null!;
+ 
 
     [OneTimeSetUp]
     public void RunBeforeAnyTests()
@@ -23,10 +23,6 @@ public class Testing
         _scopeFactory = _factory.Services.GetRequiredService<IServiceScopeFactory>();
         _configuration = _factory.Services.GetRequiredService<IConfiguration>();
 
-        //_checkpoint = new Checkpoint
-        //{
-        //    TablesToIgnore = new[] { "__EFMigrationsHistory" }
-        //};
     }
 
     public static async Task<TResponse> SendAsync<TResponse>(IRequest<TResponse> request)
@@ -39,11 +35,9 @@ public class Testing
     }
 
 
-    public static async Task ResetState()
+    public static void  ResetState()
     {
-        // await _checkpoint.Reset(_configuration.GetConnectionString("DefaultConnection"));
-
-
+        
     }
 
     public static async Task<TEntity?> FindAsync<TEntity>(params object[] keyValues)
@@ -57,17 +51,18 @@ public class Testing
     }
 
     public static async Task<Domain.Entities.Order> FindOrder(string orderID)
-
     {
         using var scope = _scopeFactory.CreateScope();
 
         var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
 
+#pragma warning disable CS8603
         return await context.Orders
                  .Where(a => a.OrderID== orderID)
                  .Include(a => a.Items)
                  .ThenInclude(a => a.Product)
-                 .FirstOrDefaultAsync();
+                 .FirstOrDefaultAsync() ;
+#pragma warning restore CS8603
     }
 
     public static async Task AddAsync<TEntity>(TEntity entity)

@@ -4,8 +4,8 @@
 public abstract class BaseTestFixture
 {
     [SetUp]
-    public async Task TestSetUp()
+    public void TestSetUp()
     {
-        await Testing.ResetState();
+        //await Testing.ResetState();
     }
 }
